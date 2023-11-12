@@ -1,4 +1,5 @@
 import json
+import os
 
 from istorage import IStorage
 
@@ -53,3 +54,10 @@ class StorageJson(IStorage):
     def _write_file(self, data):
         with open(self.file_path, "w") as file:
             json.dump(data, file)
+
+    def file_exists(self):
+        return os.path.exists(self.file_path)
+
+    def create_file(self):
+        with open(self.file_path, 'w') as file:
+            json.dump({}, file)

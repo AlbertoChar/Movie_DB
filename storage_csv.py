@@ -1,4 +1,5 @@
 import csv
+import os
 
 from istorage import IStorage
 
@@ -45,3 +46,12 @@ class StorageCsv(IStorage):
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(data.values())
+
+    def file_exists(self):
+        return os.path.exists(self.file_path)
+
+    def create_file(self):
+        with open(self.file_path, 'w', newline='') as file:
+            fieldnames = ["name", "year", "rating", "poster", "note"]  # Adjust field names as needed
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
